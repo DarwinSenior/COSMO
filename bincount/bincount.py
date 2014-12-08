@@ -62,6 +62,6 @@ if __name__ == '__main__':
 			count_result = concatenate((count_result, zeros(30-len(count_result), dtype=int)))
 			counter = add(counter, count_result)
 			print(str(counter))
-			print("finished grid i, j")
+			print("finished grid %d, %d"%(i,j))
 	for i in range(30):
 		logfile.write("bin:%d number:%d"%(i, counter[i]))
