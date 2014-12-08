@@ -8,6 +8,8 @@
 # March 5, 2007
 #
 
+from functools import reduce
+
 class trapezoid:
     
     """
@@ -71,7 +73,7 @@ class trapezoid:
                 
             else:
                 
-                print "Error, integration did not converge when using extended trapezoid rule."
+                print("Error, integration did not converge when using extended trapezoid rule.")
                 
         return result
     
@@ -84,7 +86,7 @@ class trapezoid:
         
         OUTPUTS: The 
         
-        v1.0 Robert J. Brunner, March 5, 2007     
+        v1.0 Robert J. Brunner, March 5, 2007    
         """
         
         if(iteration == 0):
@@ -118,9 +120,9 @@ if __name__ == '__main__':
 
     t = trapezoid(testfunc)
 
-    print t.integrate(0.0, 1.0), "should be 0.5"
+    print(t.integrate(0.0, 1.0), "should be 0.5")
 
     t2 = trapezoid(testfunc2)
 
-    print 3000.0 * (1 + float(0.558)) * t2.integrate(0.0, 0.558),
-    print 2265.876909, "NW's tool",  2264.797863, "Romberg"
+    print(3000.0 * (1 + float(0.558)) * t2.integrate(0.0, 0.558))
+    print(2265.876909, "NW's tool",  2264.797863, "Romberg")

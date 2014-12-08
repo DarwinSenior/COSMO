@@ -14,8 +14,8 @@
 from math import sin, cos, asin, acos, radians, degrees, sqrt
 from gzip import GzipFile
 
-from pcsource import pcsource
-from cdistance import cdistance
+from .pcsource import pcsource
+from .cdistance import cdistance
 
 class pczsource(pcsource):
     """
