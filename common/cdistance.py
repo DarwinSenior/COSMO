@@ -6,7 +6,7 @@
 #
 
 from math import sqrt, pi
-from numeric.integrate import trapezoid
+from ..numeric.integrate import trapezoid
 
 class cdistance:
 

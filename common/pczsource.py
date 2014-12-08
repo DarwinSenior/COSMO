@@ -14,7 +14,7 @@
 from math import sin, cos, asin, acos, radians, degrees, sqrt
 from gzip import GzipFile
 
-from common.pcsource import pcsource
+from pcsource import pcsource
 from cdistance import cdistance
 
 class pczsource(pcsource):

@@ -17,7 +17,7 @@
 from math import sin, cos, asin, acos, radians, degrees, sqrt
 from gzip import GzipFile
 
-from common.pczsource import pczsource
+from pczsource import pczsource
 
 class pczsourcejk(pczsource):
     """
