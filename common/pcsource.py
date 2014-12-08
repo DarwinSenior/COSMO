@@ -177,17 +177,16 @@ class pcsource:
         
         """
                 
-	ra1 = radians(self.ra)
-	ra2 = radians(aSource.ra)
-	dec1 = radians(self.dec)
-	dec2 = radians(aSource.dec)
-	
-	deltaRA = 0.5 * (ra1 - ra2)     # delta longitude
-	deltaDEC = 0.5 * (dec1 - dec2)  # delta latitude
+        ra1 = radians(self.ra)
+        ra2 = radians(aSource.ra)
+        dec1 = radians(self.dec)
+        dec2 = radians(aSource.dec)
 
-	# Angular distance in radians
+        deltaRA = 0.5 * (ra1 - ra2)     # delta longitude
+        deltaDEC = 0.5 * (dec1 - dec2)  # delta latitude
         
-	angle = 2*asin(min(1.0, sqrt(sin(deltaDEC)**2 + cos(dec1) * cos(dec2) * sin(deltaRA)**2)))
+        # Angular distance in radians
+        angle = 2*asin(min(1.0, sqrt(sin(deltaDEC)**2 + cos(dec1) * cos(dec2) * sin(deltaRA)**2)))
 
         return angle
     
