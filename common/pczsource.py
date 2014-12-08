@@ -279,7 +279,7 @@ class pczsource(pcsource):
                             sources.append(pczsource.create(ra, dec, z))
 
             except IOError:
-                print "ERROR: Could not read succesfully from ", infile
+                print("ERROR: Could not read succesfully from ", infile)
                         
         finally:
             input.close()
@@ -370,9 +370,9 @@ if __name__ == '__main__':
     a = pczsource.create(10, 10, 0.1)
     b = pczsource.create(11, 11, 0.2)
 
-    print a.pcComovingDistance(b)
-    print a.pcAngularDistance(b)
-    print a.pcDeltaDistance(b)
-    print "Distance to a = ", a.pcDistance()
-    print a
-    print b
+    print(a.pcComovingDistance(b))
+    print(a.pcAngularDistance(b))
+    print(a.pcDeltaDistance(b))
+    print("Distance to a = ", a.pcDistance())
+    print(a)
+    print(b)
