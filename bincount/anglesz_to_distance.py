@@ -1,7 +1,7 @@
 from ..common.pczsource import pczsource
 
 def parseLineToDistance(line):
-	theta, phi, z = map(float, line.split(" "))
+	theta, phi, z = map(float, line.split())
 	source = pczsource.create(theta, phi, z)
 	return source.pcDistance()
 """
