@@ -1,4 +1,4 @@
-from COSMO.common.pczsource import pczsource
+from common.pczsource import pczsource
 
 def parseLineToDistance(line):
 	theta, phi, z = map(float, line.split(" "))

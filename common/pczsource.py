@@ -350,7 +350,7 @@ class pczsource(pcsource):
                             output.write(repr(pczsource.create(ra, dec, z)) + "\n")
 
             except IOError:
-                print "ERROR: IO problem when reading or writing from specified files."
+                print("ERROR: IO problem when reading or writing from specified files.")
                         
         finally:
             input.close()

@@ -388,7 +388,7 @@ class pcsource:
                             sources.append(pcsource.create(ra, dec))
 
             except IOError:
-                print "ERROR: Could not read succesfully from ", infile
+                print("ERROR: Could not read succesfully from ", infile)
                         
         finally:
             input.close()
@@ -442,7 +442,7 @@ class pcsource:
                     sources.append(cls.parse(cols))
         
             except IOError:
-                print "ERROR: Could not read succesfully from ", infile
+                print("ERROR: Could not read succesfully from ", infile)
 
         finally:
             input.close()
@@ -491,7 +491,7 @@ class pcsource:
                     output.write(repr(source) + "\n")
 
             except IOError:
-                print "ERROR: Could not write succesfully to ", outfile
+                print("ERROR: Could not write succesfully to ", outfile)
 
         finally:
             output.close()
@@ -559,7 +559,7 @@ class pcsource:
                             output.write(repr(pcsource.create(ra, dec)) + "\n")
 
             except IOError:
-                print "ERROR: IO problem when reading or writing from specified files."
+                print("ERROR: IO problem when reading or writing from specified files.")
                         
         finally:
             input.close()
@@ -584,11 +584,11 @@ if __name__ == '__main__':
     a = pcsource.create(10, 10)
     b = pcsource.create(11,11)
 
-    print a.hsAngularDistance(b)
-    print a.pcCosTheta(b)
-    print a.pcAngularDistance(b)
-    print a
-    print b
+    print(a.hsAngularDistance(b))
+    print(a.pcCosTheta(b))
+    print(a.pcAngularDistance(b))
+    print(a)
+    print(b)
     
     # To sort a list of source objects, simply call the list's sort
     # method but pass in a lambda function defined such that
@@ -601,6 +601,6 @@ if __name__ == '__main__':
 
     p1 = pcsource.create(113.663293553, 32.0010041224)
     p2 = pcsource.create(113.663293554, 32.001004123)
-    print "%20.16E" % (p1.pcAngularDistance(p2))
-    print "%20.16E" % (p1.pcAngularDistance(p1))
-    print "%20.16E" % (p1.hsAngularDistance(p1))
+    print("%20.16E" % (p1.pcAngularDistance(p2)))
+    print("%20.16E" % (p1.pcAngularDistance(p1)))
+    print("%20.16E" % (p1.hsAngularDistance(p1)))

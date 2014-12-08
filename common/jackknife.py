@@ -211,7 +211,7 @@ def theMain(inFile, treeLevel, raCol, decCol):
                         source.getCartesianValue(2)))
 
     for source in cSources:
-	print source[0], source[1], source[2]
+	print(source[0], source[1], source[2])
 
     jktree = jkTree(treeLevel, cSources)
 

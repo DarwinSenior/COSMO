@@ -84,7 +84,7 @@ if __name__ == '__main__':
 
     c = cdistance()
 
-    print "Luminosity distance at a redshift of 1.0 = ", c.dl(4.17), " h^{-1} Mpc"
-    print "Angular Diameter distance at a redshift of 1.0 = ", c.da(1.0), "  h^{-1} Mpc"
+    print("Luminosity distance at a redshift of 1.0 = ", c.dl(4.17), " h^{-1} Mpc")
+    print("Angular Diameter distance at a redshift of 1.0 = ", c.da(1.0), "  h^{-1} Mpc")
 
-    print "Luminosity distance at a redshift of .843 = ", c.dl(0.843), " h^{-1} Mpc", "RI gives 3748.841008"
+    print("Luminosity distance at a redshift of .843 = ", c.dl(0.843), " h^{-1} Mpc", "RI gives 3748.841008")

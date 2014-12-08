@@ -294,7 +294,7 @@ def theMain():
 
     a.fillTree(sources)
 
-    print a
+    print(a)
 
     limit = 1.0/60.0
 
@@ -307,7 +307,7 @@ def theMain():
         for s in matches:
             output = output + "%6.4f " % (s.angularDistance(testsource))
 
-        print len(matches), testsource.ra, testsource.dec, output
+        print(len(matches), testsource.ra, testsource.dec, output)
 
 # On My Laptop
 ## No raOffset in code
@@ -329,4 +329,4 @@ if __name__ == '__main__':
 
     theMain()
 
-    print "Total Time        :", "%12.2f " % (clock() - startTime)
+    print("Total Time        :", "%12.2f " % (clock() - startTime))
