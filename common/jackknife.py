@@ -65,10 +65,10 @@ class jkLeafNode(jkNode):
 
         # Now set id for jackknife numerical assignment
 
-        self.id = jkLeafNode.id        
+        self.id = jkLeafNode.id  
         jkLeafNode.id += 1
 
-#        print "%d source sin leaf node #%d" % (len(sources), self.id)
+#     print "%d source sin leaf node #%d" % (len(sources), self.id)
 
     def __repr__(self):
 
@@ -103,7 +103,7 @@ class jkNonLeafNode(jkNode):
         self.left = nodeFactory(nodeType, level, sources[:splitIndex])
         self.right = nodeFactory(nodeType, level, sources[splitIndex:])
 
-#        self.area = reduce(cumulate, [node.area  for node in self.nodes])
+#     self.area = reduce(cumulate, [node.area  for node in self.nodes])
 
     def __repr__(self):
 
@@ -178,7 +178,7 @@ class jkTree:
 
     """The class that represents the Jackknife Tree"""
     
-    level = 0            # The level to which the Jackknife Tree should be built.
+    level = 0       # The level to which the Jackknife Tree should be built.
     
     def __init__(self, level, sources):
 
@@ -215,16 +215,16 @@ def theMain(inFile, treeLevel, raCol, decCol):
 
     jktree = jkTree(treeLevel, cSources)
 
-#    for source in sources:
-#        print source.ra, source.dec, jktree.getJackknife(source)
+#   for source in sources:
+#     print source.ra, source.dec, jktree.getJackknife(source)
 	
-#    print jktree
+#   print jktree
 
-#    jackknifeNumbers = [jktree.getJackknife(source) for source in sources]
+#   jackknifeNumbers = [jktree.getJackknife(source) for source in sources]
 #
-#    for index in range(8):
-#        temp = [value for value in jackknifeNumbers if value == index]
-#        print index, len(temp)
+#   for index in range(8):
+#     temp = [value for value in jackknifeNumbers if value == index]
+#     print index, len(temp)
 
 if __name__ == '__main__':
     
@@ -241,5 +241,5 @@ if __name__ == '__main__':
 
     theMain(inFile, treeLevel, raCol, decCol)
 
-#    print "Total Time        :", "%12.2f " % (clock() - startTime)
+#   print "Total Time   :", "%12.2f " % (clock() - startTime)
 
