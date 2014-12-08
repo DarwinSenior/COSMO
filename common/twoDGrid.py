@@ -55,19 +55,19 @@ class skyNode:
         pass # Must be overridden
 
     
-##    # Given a source, this function returns true if the node contains
-##    # the source, false otherwise
+##  # Given a source, this function returns true if the node contains
+##  # the source, false otherwise
     
-##    def inNode(self, target):
+##  def inNode(self, target):
 
-##        if((target.ra + skyNode.raOffset < self.ra - self.deltaRA) or
-##           (target.ra + skyNode.raOffset > self.ra + self.deltaRA) or
-##           (target.dec < self.dec - self.deltaDEC) or
-##           (target.dec > self.dec + self.deltaDEC)):
+##  if((target.ra + skyNode.raOffset < self.ra - self.deltaRA) or
+##     (target.ra + skyNode.raOffset > self.ra + self.deltaRA) or
+##     (target.dec < self.dec - self.deltaDEC) or
+##     (target.dec > self.dec + self.deltaDEC)):
 
-##            return False
+##    return False
 
-##        return True
+##  return True
 
 # Minus one in the init method is used to signal no number was passed
 # in, which should only happen for the root node. The root node should
@@ -123,8 +123,8 @@ class skyLeafNode(skyNode):
 
 # The four child nodes in a non-leaf node are laid out as follows:
 #
-#    2     3
-#    0     1
+#   2   3
+#   0   1
 #
 
 class skyNonLeafNode(skyNode):
@@ -214,7 +214,7 @@ class skyNonLeafNode(skyNode):
         # Might not need += below, maybe just =
         #
         #sources += [node.findSources(target, angle, cosAngle) for node in nodes \
-        #            if node.count > 0]
+        #       if node.count > 0]
 
         for node in nodes:
             if node.count > 0:
@@ -246,7 +246,7 @@ class skyQuadTree:
 
     """The class that represents all 2d sky nodes in the 2d sky quad tree"""
     
-    level = 0            # The level to which the 2d sky quad tree should be built.
+    level = 0       # The level to which the 2d sky quad tree should be built.
     
     def __init__(self, level, minra, maxra, mindec, maxdec, raOffset = 0):
 
@@ -311,13 +311,13 @@ def theMain():
 
 # On My Laptop
 ## No raOffset in code
-## Total Time        :       221.11 
+## Total Time     :     221.11 
 #
 ## raOffset = 0.0 
-## Total Time        :       245.58 
+## Total Time     :     245.58 
 #
 ## raOffset = 90.0
-## Total Time        :       238.62 
+## Total Time     :     238.62 
 
 # Test Code
 
@@ -329,4 +329,4 @@ if __name__ == '__main__':
 
     theMain()
 
-    print("Total Time        :", "%12.2f " % (clock() - startTime))
+    print("Total Time     :", "%12.2f " % (clock() - startTime))

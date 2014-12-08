@@ -98,8 +98,8 @@ class pczsource(pcsource):
         Changed to static method, and explictly extracted all columns.
         """
         
-        ra = float(data[racol])         # The longitude coordinate
-        dec = float(data[deccol])       # The latitude coordinate
+        ra = float(data[racol])   # The longitude coordinate
+        dec = float(data[deccol])     # The latitude coordinate
         z = float(data[zcol])
         
         # We implicitly assume that sra, etc. follow dec column.
@@ -272,8 +272,8 @@ class pczsource(pcsource):
 
                         if filterFunction == None or filterFunction(cols):
 
-                            ra = float(cols[racol])         # The longitude coordinate
-                            dec = float(cols[deccol])       # The latitude coordinate
+                            ra = float(cols[racol])   # The longitude coordinate
+                            dec = float(cols[deccol])     # The latitude coordinate
                             z = float(cols[zcol])
                             
                             sources.append(pczsource.create(ra, dec, z))
@@ -343,8 +343,8 @@ class pczsource(pcsource):
             
                         if filterFunction == None or filterFunction(cols):
 
-                            ra = float(cols[racol])         # The longitude coordinate
-                            dec = float(cols[deccol])       # The latitude coordinate
+                            ra = float(cols[racol])   # The longitude coordinate
+                            dec = float(cols[deccol])     # The latitude coordinate
                             z = float(cols[zcol])
                             
                             output.write(repr(pczsource.create(ra, dec, z)) + "\n")

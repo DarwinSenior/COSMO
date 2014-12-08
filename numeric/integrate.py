@@ -22,7 +22,7 @@ class trapezoid:
     
     def __init__(self, integrand):
         
-        self.numPoints = 0     # Number of points to sample function on next iteration
+        self.numPoints = 0  # Number of points to sample function on next iteration
         self.result = trapezoid.initialResult  # Current value of integral
 
         self.integrand = integrand
@@ -53,7 +53,7 @@ class trapezoid:
         if start == end: result = 0.0
         
         else:
-            self.numPoints = 0     
+            self.numPoints = 0   
             
             self.start = float(start)
             self.end = float(end)
@@ -84,7 +84,7 @@ class trapezoid:
         
         OUTPUTS: The 
         
-        v1.0 Robert J. Brunner, March 5, 2007       
+        v1.0 Robert J. Brunner, March 5, 2007     
         """
         
         if(iteration == 0):

@@ -20,9 +20,9 @@
 # p1 = source.create(113.663293553, 32.0010041224)
 # p2 = source.create(113.663293554, 32.001004123)
 # p1.pcAngularDistance(p2)
-#     2.1073424255447017e-08
+#   2.1073424255447017e-08
 # p1.pcAngularDistance(p1)
-#     2.1073424255447017e-08
+#   2.1073424255447017e-08
 #
 
 # This obviously limits the accuracy of angle measurements when using
@@ -57,8 +57,8 @@ class pcsource:
     
     def __init__(self, ra, dec, sra, cra, sdec, cdec):
         
-        self.ra = float(ra)         # The longitude coordinate
-        self.dec = float(dec)       # The latitude coordinate
+        self.ra = float(ra)   # The longitude coordinate
+        self.dec = float(dec)     # The latitude coordinate
 
         # Now set the precomputed quantities
         
@@ -117,9 +117,9 @@ class pcsource:
     
         v1.0 Robert J. Brunner, March 26, 2007
  
-        """        
-        ra = float(data[racol])         # The longitude coordinate
-        dec = float(data[deccol])       # The latitude coordinate
+        """  
+        ra = float(data[racol])   # The longitude coordinate
+        dec = float(data[deccol])     # The latitude coordinate
 
         # We implicitly assume that sra, etc. follow dec column.
 
@@ -196,7 +196,7 @@ class pcsource:
         """
 
         Calculates the cosine of the angle between two sources using
-        precomputed data.        
+        precomputed data.     
     
         INPUTS: A second source to use for the calculation
         
@@ -382,8 +382,8 @@ class pcsource:
 
                         if filterFunction == None or filterFunction(cols):
                             
-                            ra = float(cols[racol])         # The longitude coordinate
-                            dec = float(cols[deccol])       # The latitude coordinate
+                            ra = float(cols[racol])   # The longitude coordinate
+                            dec = float(cols[deccol])     # The latitude coordinate
 
                             sources.append(pcsource.create(ra, dec))
 
@@ -553,8 +553,8 @@ class pcsource:
             
                         if filterFunction == None or filterFunction(cols):
 
-                            ra = float(cols[racol])         # The longitude coordinate
-                            dec = float(cols[deccol])       # The latitude coordinate
+                            ra = float(cols[racol])   # The longitude coordinate
+                            dec = float(cols[deccol])     # The latitude coordinate
 
                             output.write(repr(pcsource.create(ra, dec)) + "\n")
 
