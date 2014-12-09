@@ -1,6 +1,9 @@
-from numpy import log, floor, abs, squeeze, bincount, vectorize, array_split
+from numpy import log, floor, abs, bincount, array_split, int64
+from numpy import sin, cos, arcsin, radians, sqrt
 from numpy import ones, array, zeros, float64, ravel, minimum, maximum, add, concatenate
 from math import ceil
+
+import matplotlib.pyplot as plt
 
 
 ### It is a simple classifier for distance based on logorithm magnitude
@@ -11,6 +14,7 @@ class Bin(object):
 		self.offset = log(minbin)
 		self.size = log(maxbin/minbin)
 		self.binNum = binNum
+		self.counter = zeros(binNum+1, dtype=int64)
 	
 	# auxiliary function so that to make sure the value is always between 0 and binNum
 	def limit(self, value):
@@ -21,47 +25,99 @@ class Bin(object):
 		scale = ((log(distance)-self.offset)/self.size)*self.binNum
 		return self.limit(scale).astype(int)
 
+	def count(self, distances):
+		"""
+		seperate the distances to different bins and do bin count
+		then add the result to bins
+		then accumulate the count result to the bin
+		"""
+		count_result = bincount(self.getBin(distances))
+		print len(count_result)
+		count_result = concatenate((count_result, zeros(self.binNum+1-len(count_result), dtype=int)))
+		self.counter += count_result
+
+	def __add__(self, other):
+		"""
+		Note that self and other should be of the same max,min and bin
+		and it will create a newbin and add the counter together
+		"""
+		newbin = Bin(self.maxbin, self.minbin, self.binNum)
+		newbin.counter = self.counter+other.counter
+
 
 def distanceParser(input_name):
-	distances = list()
+	"""
+	The input file is in following formating for each line:
+	<longitute> <latitude> <z>
+	<z> value for this task is alway 1 so we ignore it
+	it reads the angle form and we should return radian form
+	"""
+	ras, decs = list(), list()
 	with open(input_name) as inputfile:
 		for line in inputfile:
-			distances.append(float(line))
-	return array(distances, dtype=float64)
+			ra, dec, _ = map(float, line.split())
+			ras.append(ra)
+			decs.append(dec)
+	return radians(array(ras, dtype=float64)), radians(array(decs, dtype=float64))
+
+def split_data(ras, decs):
+	"""
+	It will split the RAs and DECs into smaller chunks which would be better
+	for cache coherent
+	"""
+	size = ceil(len(ras)/2048.0)
+	return zip(array_split(ras, size), array_split(decs, size))
 
 def distancePair(group0, group1):
-	m,n = group0.size, group1.size
-	group0.shape = (m, 1)
-	repeat0 = ones((1, n))
-	first = group0*repeat0
-	group1.shape = (1, n)
-	repeat1 = ones((m, 1))
-	second = group1*repeat1
-	return ravel(abs(first-second))
+	"""
+	The group contains (RAs, DECs) pair, and the formular for calculating
+	angle distance is the multi-value version of Professor Brunner's hsAngularDistance
+	the source code and explaination is in pcsource.py
+	"""
+	ra0, dec0 = group0
+	ra1, dec1 = group1
 
-def count(distances):
-    return bincount(distances)
+	m,n = ra0.size, ra1.size
+
+	ra0.shape = (m, 1)
+	dec0.shape = (m, 1)
+	repeat0 = ones((1, n))
+	cos_dec0 = cos(dec0)
+	ra0 = ra0*repeat0
+	dec0 = dec0*repeat0
+
+	ra1.shape = (1, n)
+	dec1.shape = (1, n)
+	repeat1 = ones((m, 1))
+	cos_dec1 = cos(dec1)
+	ra1 = repeat1*ra1
+	dec1 = repeat1*dec1
+
+	deltaRA = 0.5*(ra0-ra1)
+	deltaDEC = 0.5*(dec0-dec1)
+
+	angles = 2*(arcsin(minimum(1.0, sqrt(sin(deltaDEC)**2)+(cos_dec0*cos_dec1)*sin(deltaRA)**2)))
+	return ravel(abs(angles))
+
 
 if __name__ == '__main__':
 	import sys
-	distances = distanceParser(sys.argv[1])
-	distace_list1 = array_split(distances, ceil(len(distances)/2048.0))
-	distace_list2 = array_split(distances, ceil(len(distances)/2048.0))
+	RAs, DECs = distanceParser(sys.argv[1])
+	groups = split_data(RAs, DECs)
 
 	mybin = Bin(maxbin=36000, minbin=2, binNum=30)
-	counter = zeros(30)
 	i, j = 0,0
-	logfile = open("log_counter", "w")
-	for d1 in distace_list1:
+	try:
+		logfile = open(sys.argv[2], "w")
+	except:
+		logfile = sys.stdout
+	for group0 in groups:
 		i += 1
-		for d2 in distace_list2:
+		for group1 in groups:
 			j += 1
-			differences = distancePair(d1, d2)
-			bins_result = mybin.getBin(differences)
-			count_result = count(bins_result)
-			count_result = concatenate((count_result, zeros(30-len(count_result), dtype=int)))
-			counter = add(counter, count_result)
-			print(str(counter))
+			distances = distancePair(group0, group1)*36000
+			mybin.count(distances)
 			print("finished grid %d, %d"%(i,j))
 	for i in range(30):
-		logfile.write("bin:%d number:%d"%(i, counter[i]))
+		print("bin:%d number:%d"%(i, mybin.counter[i]))
+		logfile.write("%d\n"%mybin.counter[i])
